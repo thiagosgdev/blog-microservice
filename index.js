@@ -4,7 +4,7 @@ const { randomBytes } = require("crypto")
 const axios = require("axios");
 
 const app = express();
-app.use(bodyParser);
+app.use(bodyParser.json());
 const posts = {};
 
 app.get("/posts", (req, res) => {
@@ -27,6 +27,12 @@ app.post("/posts", async (req, res) => {
     });
 
     res.status(201).send(posts[id]);
+});
+
+app.get("/events", (req, res) => {
+    console.log("Received Event", req.body.type);
+
+    res.send({});   
 });
 
 app.listen(console.log("Listening on 4000")); 
